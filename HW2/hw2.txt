@@ -1,0 +1,40 @@
+
+  Implementing convert_grammar was fairly easy once I fully understood the 
+idea of currying and how to return a function.
+
+  Implementing parse_tree_leaves was not too difficult either when I understood
+the form that the parse trees were constructed in. I was able to produce a list
+of leaves in order by recursive calls into nonterminal head of the current
+nodes and the rest of the children of the current node. If it ran into a leaf
+it would be concatenated into the list.
+
+  I ran into great difficulty when it came to make_matcher though. I thought 
+my implemenation would work, and it does for the smaller cases, but it failed 
+for test case 4 and got about halfway through before returning
+Some[second half of fragment]. 
+  My general idea was to pass a helper function, matcher, the list of all 
+possible rules for a nonterminal and initially pass it the start symbol 
+from make_matcher. Then test each rule in another helper function, 
+test_rule, which would either return a smaller fragment if a match was 
+found or None if no match was found. It would go through the symbols of
+the rule one at a time and if it was a nonterminal it would recursively call
+matcher and use what it returned as an updated value for fragment, or return
+None if that was returned. 
+  If it encountered a terminal symbol it would compare it to the head of
+fragment and then test to see if the new suffix was accepted by the acceptor
+function. If it was then it would continue matching the current rule with the
+rest of the fragment. Otherwise it would return None.
+
+  The implemetation for my matcher though also fails when it encounters left
+recursive grammar rules because it gets into an infinite loop and there
+is no code to stop it.
+
+  I spent a many hours tracing through my code and drawing out diagrams of the
+rules followed and tinkering with small changes in my code because it was
+very close to working but not fully functional which was very disheartening.
+I wasn't able to get it to work but it does not crash so I'm hoping it passes
+at least some of the test cases.
+  Because my matcher wasn't fully working I figured that that my parser would
+likely not work either and I had spent a lot of time trying to fix my matcher
+and have received a late penalty that I don't want to grow any further so I
+decided to have my make_parser funciton just return None.

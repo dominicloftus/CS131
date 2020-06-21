@@ -1,0 +1,23 @@
+?- ambiguous(4, C, T1, T2).
+
+C = counts([4,2,2,1],[1,2,2,4],[4,2,2,1],[1,2,2,4])
+T1 = [[1,2,3,4],[2,4,1,3],[3,1,4,2],[4,3,2,1]]
+T2 = [[1,2,3,4],[2,1,4,3],[3,4,1,2],[4,3,2,1]] ? 
+
+(1 ms) yes
+
+This is what I receiced from my ambiguous predicate. It is accomplished
+by having the center be the max and min values for those columns and rows.
+The max value is seen either way and the min value is never seen when
+the outside rows are the same, therefore the problem is ambiguous.
+
+
+?- speedup(Inc).
+
+Inc = 926.77777777777783 ? ;
+
+(10551 ms) no
+
+Inc was the result of dividing plain_tower's runtime by tower's runtime.
+Obviously constraining the problem with FDS values reduces the 
+runtime greatly.

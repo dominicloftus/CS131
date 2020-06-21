@@ -1,0 +1,24 @@
+It took a little bit to get used to the functional style of OCaml at first
+but once I did the set operation functions were straight-forward to implement.
+
+The computed fixed point I needed to read the wiki and TA slides to understand
+but was pretty easy to implement once I understood the concept.
+
+Filter reachable rules took me a while to come up with a solution but I ended
+up going with an approach that takes a nonterminal symbol thats been reached,
+starting with start symbol, and puts all rules with that nonterminal symbol
+on the left hand side into a reachable list and the other rules into a not yet
+reached list. The not yet reached list is passed on along with the right hand
+sides of the reached list, where the nonterminals found in the right hand side
+are passed back to the original function along with the not yet reached rules.
+
+Finally I used set intersection with the original grammar and the filtered list
+to get the reachable grammar.
+
+This seemed like the most straight-forward approach to me to gradually filtered
+and add to a filtered list recursively and then compare the original and
+filtered at the end.
+
+I considered an approach using computed fixed value as suggested by the TA but
+when I was having difficulty coming up with a good comparison function to use
+I decided to go with the method I used.
